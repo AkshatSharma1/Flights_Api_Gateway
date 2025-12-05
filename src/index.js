@@ -3,12 +3,14 @@ const morgan = require('morgan');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const rateLimit = require('express-rate-limit');
 const { checkAuth } = require('./middlewares/auth-request-middleware'); // <--- Import Middleware
-require('dotenv').config();
+const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3005;
 
-app.use(morgan('combined'));
+app.use(morgan("combined"));
+app.use(cors());
 
 const limiter = rateLimit({
 	windowMs: 2 * 60 * 1000,
