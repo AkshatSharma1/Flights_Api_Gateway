@@ -50,6 +50,14 @@ app.use('/api/v1/bookings', checkAuth, createProxyMiddleware({
     pathRewrite: (path) => '/api/v1/bookings' + path
 }));
 
+// 4. AI SERVICE (New Route)
+// Public access allowed
+app.use('/api/v1/ai', createProxyMiddleware({ 
+    target: process.env.AI_SERVICE_URL, // Update port as per your config
+    changeOrigin: true, 
+    pathRewrite: (path) => '/api/v1/ai' + path
+}));
+
 //Ping check
 app.get('/info', (req, res) => {
     return res.json({ message: 'API Gateway is Live' });
