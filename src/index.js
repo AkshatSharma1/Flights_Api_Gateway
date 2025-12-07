@@ -10,7 +10,11 @@ const app = express();
 const PORT = process.env.PORT || 3005;
 
 app.use(morgan("combined"));
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 const limiter = rateLimit({
 	windowMs: 2 * 60 * 1000,
